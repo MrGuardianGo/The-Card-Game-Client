@@ -38,6 +38,7 @@ function App() {
     setGameStatus("");
     setActivateWinBtn(false);
     setTurn("");
+    setWinners([])
   }
 
   function giveaway(card) {
@@ -65,7 +66,6 @@ function App() {
 
   useEffect(() => {
     socket.on("exception", (data) => {
-      console.log(data);
       setError(data.errorMessage);
       setJoiningRoom(false)
     });
@@ -106,12 +106,11 @@ function App() {
       setTurn(data.turn);
     });
     socket.on("activate-win-btn", (data) => {
-      if (data) setActivateWinBtn(true);
+      setActivateWinBtn(data);
     });
     socket.on("winners", (data) => {
       setWinners(data.winners);
       setActivateWinBtn(true);
-      console.log(data.winners);
     });
   }, [socket]);
 

@@ -240,7 +240,7 @@ h2 {
   top: 53%;
   left: 50%;
   transform: translate(-50%, -50%);
-  z-index: 10;
+  z-index: 90;
   background: #df4141;
   width: 150px;
   height: 150px;
@@ -270,6 +270,7 @@ h2 {
 }
 
 .final-statistics {
+  padding: 4px;
   display: flex;
   flex-direction: column;
   align-items: center;

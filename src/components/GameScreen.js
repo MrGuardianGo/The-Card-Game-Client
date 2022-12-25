@@ -42,7 +42,8 @@ function GameScreen({
 
   return (
     <div className="game-screen">
-      {winners.length === 4 &&
+      {activateWinBtn && winners.length > 0 ? <div className="backdrop" /> : <></>}
+      {winners.length === 4 && (
         <>
           <div className="backdrop"></div>
           <div className="final-statistics">
@@ -94,10 +95,12 @@ function GameScreen({
                 </span>
               </span>
             </div>
-            <button className="return-btn" onClick={returnToMainScreen}>Return to main screen</button>
+            <button className="return-btn" onClick={returnToMainScreen}>
+              Return to main screen
+            </button>
           </div>
         </>
-      }
+      )}
       <h1 style={{ textTransform: "uppercase", fontSize: "15px" }}>
         {turn}'s Turn <i class="uil uil-signal-alt-3"></i>
       </h1>
