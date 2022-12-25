@@ -10,7 +10,12 @@
 }
 
 body {
+  height: 100vh;
+  width: 100vw;
   overflow: hidden;
+  background-image: url("../public/assets/background.jpeg");
+  /* background-repeat: no-repeat; */
+  background-size: cover;
 }
 
 button {
@@ -20,9 +25,6 @@ button {
 .main-window {
   width: 100vw;
   height: 100vh;
-  background-image: url("../public/assets/background.jpeg");
-  background-repeat: no-repeat;
-  background-size: cover;
 }
 
 .main-screen {
@@ -361,6 +363,9 @@ h2 {
 }
 
 @media only screen and (max-width: 750px) {
+  .win-button {
+    top: 54%;
+  }
   .opponent.no-2 .cards {
     margin-left: 10px;
   }
@@ -370,21 +375,53 @@ h2 {
 }
 
 @media only screen and (max-width: 550px) {
+  h1 {
+    font-size: 30px;
+  }
   .main-screen-img {
     width: 400px;
   }
-  .opponent.no-2 .cards {
-    margin-left: -30px;
+  .opponent.no-2 {
+    margin-left: -40px;
   }
-  .opponent.no-3 .cards {
-    margin-right: -30px;
+
+  .opponent.no-3 {
+    margin-right: -40px;
   }
 
   .opponent.no-2 h2 {
-    margin-left: 5px;
+    margin-left: 20px;
   }
 
   .opponent.no-3 h2 {
-    margin-right: 10px;
+    margin-right: 20px;
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  .win-button {
+    top: 50%
+  }
+  .you .card {
+    margin-left: 0px;
+  }
+  .card img {
+    width: 75px;
+  }
+  .opponent.no-1 {
+    /* width: 100vw; */
+    /* margin-right: 10px; */
+  }
+  .opponent.no-2 {
+    margin-left: -80px;
+  }
+  .opponent.no-3 {
+    margin-right: -80px;
+  }
+}
+
+@media only screen and (max-width: 400px) {
+  h1 {
+    font-size: 7vw;
   }
 }
