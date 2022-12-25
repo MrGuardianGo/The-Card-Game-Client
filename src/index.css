@@ -1,13 +1,389 @@
-body {
+@import url(https://fonts.googleapis.com/css?family=Roboto+Condensed:300,300italic,regular,italic,700,700italic);
+
+* {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Roboto Condensed", sans-serif;
+  outline: none;
+  user-select: none;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+body {
+  overflow: hidden;
+}
+
+button {
+  cursor: pointer;
+}
+
+.main-window {
+  width: 100vw;
+  height: 100vh;
+  background-image: url("../public/assets/background.jpeg");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.main-screen {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.main-screen form {
+  display: flex;
+  flex-direction: column;
+  margin-top: 30px;
+}
+
+.main-screen form input,
+button {
+  width: 20vw;
+  min-width: 250px;
+  font-size: 20px;
+  font-weight: bold;
+  border: 4px solid #929292;
+  border-radius: 8px;
+  padding: 12px 10px;
+  margin-bottom: 5px;
+}
+
+.main-screen form input:last-of-type {
+  margin-bottom: 15px;
+}
+
+.main-screen form button {
+  margin: 0;
+  background: none;
+  border-color: #ffffff;
+  color: #ffffff;
+  transition: background, color 0.1s ease-in-out;
+}
+
+.main-screen form button:hover {
+  background: white;
+  color: #444444;
+}
+
+.error-message {
+  color: #df4141;
+  margin-bottom: 5px;
+  width: 20vw;
+  min-width: 250px;
+}
+
+h1 {
+  color: white;
+}
+
+h1.spinner {
+  transform: rotate(0deg);
+  animation: spinner linear 1s infinite;
+  margin-left: 10px;
+}
+
+@keyframes spinner {
+  0% {
+    transform: rotate(0deg) scale(1);
+  }
+  50% {
+    transform: rotate(180deg) scale(1.25);
+  }
+  100% {
+    transform: rotate(360deg) scale(1);
+  }
+}
+
+.player-list {
+  list-style-type: decimal;
+  font-size: 24px;
+  font-weight: bolder;
+  color: white;
+  margin-top: 20px;
+}
+
+.display-flex {
+  display: flex;
+}
+
+.game-screen {
+  padding: 20px;
+}
+
+.table {
+  margin-top: 10px;
+  padding: 20px 200px;
+  width: 100%;
+  height: 100%;
+}
+
+.game-screen h1 {
+  text-align: center;
+}
+
+.game-screen h1 i {
+  cursor: pointer;
+}
+
+.opponent .cards {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.you .cards {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.opponent.no-2 {
+  display: flex;
+  height: 300px;
+}
+
+.opponent.no-3 {
+  display: flex;
+  float: right;
+  height: 300px;
+}
+
+.opponent.no-2 .cards {
+  display: flex;
+  flex-direction: column;
+  margin-left: 100px;
+}
+
+.opponent.no-3 .cards {
+  display: flex;
+  flex-direction: column;
+  margin-right: 100px;
+}
+
+.opponent.no-1 .card {
+  margin-left: -30px;
+}
+.opponent.no-1 .card:first-of-type {
+  margin-left: 0px;
+}
+
+.you .card {
+  margin-left: -150px;
+}
+.you .card:first-of-type {
+  margin-left: 0px;
+}
+
+.opponent.no-2 .card {
+  margin-top: -100px;
+  transform: rotate(90deg);
+}
+.opponent.no-2 .card:first-of-type {
+  margin-top: 0px;
+}
+
+.opponent.no-3 .card {
+  margin-top: -100px;
+  transform: rotate(90deg);
+}
+.opponent.no-3 .card:first-of-type {
+  margin-top: 0px;
+}
+
+h2 {
+  color: white;
+  font-size: 20px;
+  text-align: center;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+}
+
+.opponent.no-2 h2 {
+  margin-top: auto;
+  margin-bottom: auto;
+  transform: rotate(90deg);
+  margin-left: 20px;
+}
+
+.opponent.no-3 h2 {
+  margin-top: auto;
+  margin-bottom: auto;
+  transform: rotate(-90deg);
+  margin-right: 20px;
+}
+
+.you {
+  margin-top: -10px;
+  /* background-color: red; */
+}
+
+.you .card {
+  margin-left: 20px;
+  transform: scale(1);
+  transition: all 0.1s ease-in-out;
+  cursor: pointer;
+}
+
+.you .card:hover {
+  transform: scale(1.1);
+}
+
+.win-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 53%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 10;
+  background: #df4141;
+  width: 150px;
+  height: 150px;
+  color: white;
+  text-align: center;
+  font-weight: bold;
+  font-size: 24px;
+  border-radius: 50%;
+  border: 10px solid #ff7272;
+  cursor: pointer;
+}
+
+.disabled {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.backdrop {
+  background-color: black;
+  opacity: 0.6;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 80;
+}
+
+.final-statistics {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  height: 450px;
+  width: 350px;
+  background-color: white;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 100;
+  border-radius: 4px;
+  animation: popup 0.4s ease-in-out;
+}
+
+.return-btn {
+  width: 100%;
+  border: none;
+  margin-top: 20px;
+  border-radius: 0px;
+  color: white;
+  background: none;
+  border: 2px solid rgb(104, 142, 255);
+  color: rgb(104, 142, 255);
+  font-weight: 400;
+  /* padding: 0 10px; */
+  width: 80%;
+  border-radius: 5px;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+  font-size: 18px;
+}
+
+.final-statistics h1 {
+  margin: 20px 0;
+  color: #444444;
+  text-align: center;
+  text-transform: uppercase;
+  font-weight: 200;
+}
+
+.final-statistics .player-details {
+  display: flex;
+  flex-direction: column;
+  margin: 2px 0;
+  width: 100%;
+}
+
+.final-statistics .player-details span {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.final-statistics .player-details span .rank {
+  padding: 20px 30px;
+  background-color: #cacaca;
+  color: white;
+  font-size: 26px;
+}
+
+.final-statistics .player-details span .name-score {
+  padding: 20px;
+  width: 100%;
+  font-size: 20px;
+  border-left: none;
+  border-right: none;
+}
+
+.final-statistics .player-details span .score {
+  font-weight: 200;
+}
+
+@keyframes popup {
+  0% {
+    transform: scale(0) translate(-50%, -50%);
+  }
+  100% {
+    transform: scale(1) translate(-50%, -50%);
+  }
+}
+
+@media only screen and (max-width: 1200px) {
+  .table {
+    padding: 0px;
+  }
+}
+
+@media only screen and (max-width: 750px) {
+  .opponent.no-2 .cards {
+    margin-left: 10px;
+  }
+  .opponent.no-3 .cards {
+    margin-right: 10px;
+  }
+}
+
+@media only screen and (max-width: 550px) {
+  .main-screen-img {
+    width: 400px;
+  }
+  .opponent.no-2 .cards {
+    margin-left: -30px;
+  }
+  .opponent.no-3 .cards {
+    margin-right: -30px;
+  }
+
+  .opponent.no-2 h2 {
+    margin-left: 5px;
+  }
+
+  .opponent.no-3 h2 {
+    margin-right: 10px;
+  }
 }
