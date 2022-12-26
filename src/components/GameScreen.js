@@ -11,6 +11,7 @@ function GameScreen({
   winRound,
   winners,
   returnToMainScreen,
+  closeInfoModal,
 }) {
   const [counter, setCounter] = useState(10);
   const [card, setCard] = useState(null);
@@ -36,13 +37,23 @@ function GameScreen({
     }
   }, [card]);
 
+  useEffect(() => {
+    if (winners.length === 4 || activateWinBtn || winners.length > 0) {
+      closeInfoModal();
+    }
+  }, [winners]);
+
   function setGiveawayCard(selectedCard) {
     setCard(selectedCard);
   }
 
   return (
     <div className="game-screen">
-      {activateWinBtn && winners.length > 0 ? <div className="backdrop" /> : <></>}
+      {activateWinBtn && winners.length > 0 ? (
+        <div className="backdrop" />
+      ) : (
+        <></>
+      )}
       {winners.length === 4 && (
         <>
           <div className="backdrop"></div>
@@ -56,7 +67,7 @@ function GameScreen({
                   style={{ color: "#FFD700" }}
                 >
                   <h3 className="name">{winners[0]}</h3>
-                  <h3 className="score">40</h3>
+                  <h3 className="score">30</h3>
                 </span>
               </span>
             </div>
@@ -68,7 +79,7 @@ function GameScreen({
                   style={{ color: "#C0C0C0" }}
                 >
                   <h3 className="name">{winners[1]}</h3>
-                  <h3 className="score">30</h3>
+                  <h3 className="score">20</h3>
                 </span>
               </span>
             </div>
@@ -80,17 +91,17 @@ function GameScreen({
                   style={{ color: "#CD7F32" }}
                 >
                   <h3 className="name">{winners[2]}</h3>
-                  <h3 className="score">20</h3>
+                  <h3 className="score">10</h3>
                 </span>
               </span>
             </div>
             <div className="player-details">
               <span className="display-flex">
-                <h3 className="rank">4</h3>
+                <h3 className="rank">🤡</h3>
                 <span className="display-flex name-score">
                   <h3 className="name">{winners[3]}</h3>
                   <h3 className="score" style={{ fontWeight: 200 }}>
-                    10
+                    0
                   </h3>
                 </span>
               </span>

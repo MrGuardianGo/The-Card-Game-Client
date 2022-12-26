@@ -48,6 +48,10 @@ function App() {
     }
   }
 
+  function closeInfoModal() {
+    setInfo(false)
+  }
+
   function winRound() {
     socket.emit("win-button-pressed", {
       roomID,
@@ -139,6 +143,7 @@ function App() {
           winRound={winRound}
           winners={winners}
           returnToMainScreen={returnToMainScreen}
+          closeInfoModal={closeInfoModal}
         />
       );
     }
