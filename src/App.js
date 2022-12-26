@@ -19,6 +19,7 @@ function App() {
   const [cards, setCards] = useState([]);
   const [winners, setWinners] = useState([]);
   const [error, setError] = useState(null);
+  const [info, setInfo] = useState(false);
 
   function joinRoom(username, roomID) {
     setMyUsername(username);
@@ -38,7 +39,7 @@ function App() {
     setGameStatus("");
     setActivateWinBtn(false);
     setTurn("");
-    setWinners([])
+    setWinners([]);
   }
 
   function giveaway(card) {
@@ -67,7 +68,7 @@ function App() {
   useEffect(() => {
     socket.on("exception", (data) => {
       setError(data.errorMessage);
-      setJoiningRoom(false)
+      setJoiningRoom(false);
     });
     socket.on("room-players", (data) => {
       setRoomPlayers(data);
@@ -143,7 +144,51 @@ function App() {
     }
   }
 
-  return <div className="main-window">{<Renderer />}</div>;
+  return (
+    <div className="main-window">
+      <button
+        className="info-btn"
+        onClick={() => {
+          setInfo(true);
+        }}
+      >
+        <i class="uil uil-info-circle"></i>
+      </button>
+      {info && (
+        <>
+          <div className="backdrop" />
+          <div className="info-modal">
+            <button
+              className="close-btn"
+              onClick={() => {
+                setInfo(false);
+              }}
+            >
+              &times;
+            </button>
+            <h1>Instructions</h1>
+            <ol>
+              <li>There are 4 players and 16 cards in a single game.</li>
+              <li>All cards are distributed evenly among each player.</li>
+              <li>
+                The game involves passing a card to a player next to them. Pass
+                On goes in an anti-clockwise direction.
+              </li>
+              <li>
+                Once a player has a set of four equal cards, they can either
+                press the button in the centre or keep playing further.
+              </li>
+              <li>
+                If the button is pressed, the remaining players' buttons get
+                activated as well. Press the button ASAP to land a high score.
+              </li>
+            </ol>
+          </div>
+        </>
+      )}
+      {<Renderer />}
+    </div>
+  );
 }
 
 export default App;
