@@ -176,8 +176,7 @@ function App() {
               <li>There are 4 players and 16 cards in a single game.</li>
               <li>All cards are distributed evenly among each player.</li>
               <li>
-                The game involves passing a card to a player next to them. Pass
-                On goes in an anti-clockwise direction.
+                The game involves passing a card to a player next to them. <strong>Pass On</strong> goes in an anti-clockwise direction.
               </li>
               <li>
                 Once a player has a set of four equal cards, they can either

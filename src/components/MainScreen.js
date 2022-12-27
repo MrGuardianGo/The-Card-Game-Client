@@ -19,7 +19,7 @@ function MainScreen({ joinRoom, setErrorMessage, error }) {
         className="main-screen-img"
         src="assets/main.png"
         alt="Main screen logo"
-        width={500}
+        width={350}
       />
       <form onSubmit={submitHandler}>
         <input
