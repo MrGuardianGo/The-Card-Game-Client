@@ -119,6 +119,7 @@ function GameScreen({
       <div
         className={activateWinBtn ? "win-button" : "win-button disabled"}
         onClick={winRound}
+        style={winners.includes(username) ? {'pointerEvents': 'none'} : {}}
       >
         {winners.length === 0 ? (
           <span>

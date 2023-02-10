@@ -4,7 +4,7 @@ import MainScreen from "./components/MainScreen";
 import io from "socket.io-client";
 import { useEffect, useState } from "react";
 
-const socket = io("https://the-card-game-server.onrender.com");
+const socket = io("http://localhost:8000");
 
 function App() {
   const [myUsername, setMyUsername] = useState("");
@@ -30,6 +30,10 @@ function App() {
     }
   }
 
+  function callBots() {
+    socket.emit("bots", { roomID });
+  }
+
   function returnToMainScreen() {
     setJoiningRoom(false);
     setGameStarted(false);
@@ -49,7 +53,7 @@ function App() {
   }
 
   function closeInfoModal() {
-    setInfo(false)
+    setInfo(false);
   }
 
   function winRound() {
@@ -114,6 +118,8 @@ function App() {
       setActivateWinBtn(data);
     });
     socket.on("winners", (data) => {
+      console.log(data);
+      console.log('Got the fucking winners');
       setWinners(data.winners);
       setActivateWinBtn(true);
     });
@@ -129,7 +135,14 @@ function App() {
         />
       );
     } else if (joiningRoom && !gameStarted) {
-      return <JoiningRoom roomPlayers={roomPlayers} gameStatus={gameStatus} />;
+      return (
+        <JoiningRoom
+          roomPlayers={roomPlayers}
+          gameStatus={gameStatus}
+          username={myUsername}
+          callBots={callBots}
+        />
+      );
     } else if (!joiningRoom && gameStarted) {
       return (
         <GameScreen
@@ -176,7 +189,8 @@ function App() {
               <li>There are 4 players and 16 cards in a single game.</li>
               <li>All cards are distributed evenly among each player.</li>
               <li>
-                The game involves passing a card to a player next to them. <strong>Pass On</strong> goes in an anti-clockwise direction.
+                The game involves passing a card to a player next to them.{" "}
+                <strong>Pass On</strong> goes in an anti-clockwise direction.
               </li>
               <li>
                 Once a player has a set of four equal cards, they can either

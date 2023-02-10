@@ -8,6 +8,13 @@ function MainScreen({ joinRoom, setErrorMessage, error }) {
 
   function submitHandler(e) {
     e.preventDefault();
+    if (
+      username == "" ||
+      username.toLocaleLowerCase() === "you" ||
+      roomID === "" ||
+      username.length >= 10
+    )
+      return;
     localStorage.setItem("username", username);
     sessionStorage.setItem("roomID", roomID);
     joinRoom(username, roomID);
