@@ -4,7 +4,7 @@ import MainScreen from "./components/MainScreen";
 import io from "socket.io-client";
 import { useEffect, useState } from "react";
 
-const socket = io("http://localhost:8000");
+const socket = io("https://the-card-game-server.onrender.com/");
 
 function App() {
   const [myUsername, setMyUsername] = useState("");
