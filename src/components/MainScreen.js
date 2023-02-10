@@ -1,20 +1,24 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 function MainScreen({ joinRoom, setErrorMessage, error }) {
-  const [username, setUsername] = useState(
-    localStorage.getItem("username") || ""
-  );
+  const [username, setUsername] = useState('');
   const [roomID, setRoomID] = useState(sessionStorage.getItem("roomID") || "");
 
+  useEffect(() => {
+    setUsername(localStorage.getItem("username"));
+  }, [])
+  
   function submitHandler(e) {
     e.preventDefault();
     if (
       username == "" ||
       username.toLocaleLowerCase() === "you" ||
       roomID === "" ||
-      username.length >= 10
-    )
+      username.length > 10
+    ) {
+      setErrorMessage("Username is too long...");
       return;
+    }
     localStorage.setItem("username", username);
     sessionStorage.setItem("roomID", roomID);
     joinRoom(username, roomID);
@@ -35,6 +39,9 @@ function MainScreen({ joinRoom, setErrorMessage, error }) {
           onChange={(e) => {
             setUsername(e.target.value);
             setErrorMessage(null);
+            if (e.target.value.length > 10) {
+              setErrorMessage("Username is too long...");
+            }
           }}
           value={username}
         />
@@ -52,7 +59,7 @@ function MainScreen({ joinRoom, setErrorMessage, error }) {
             username == "" ||
             username.toLocaleLowerCase() === "you" ||
             roomID === "" ||
-            username.length >= 10
+            username.length > 10
               ? "disabled"
               : ""
           }
