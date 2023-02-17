@@ -5,7 +5,7 @@ function MainScreen({ joinRoom, setErrorMessage, error }) {
   const [roomID, setRoomID] = useState(sessionStorage.getItem("roomID") || "");
 
   useEffect(() => {
-    setUsername(localStorage.getItem("username"));
+    if (localStorage.getItem("username")) setUsername(localStorage.getItem("username"));
   }, [])
   
   function submitHandler(e) {
